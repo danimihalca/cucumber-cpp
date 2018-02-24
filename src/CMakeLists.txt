@@ -49,5 +49,10 @@ if(MINGW)
     list(APPEND CUKE_DEP_LIBRARIES ws2_32)
 endif(MINGW)
 
+set(QNX_TARGET $ENV{QNX_TARGET})
+if(QNX_TARGET)
+    list(APPEND CUKE_DEP_LIBRARIES "-Wl,--whole-archive -lsocket -Wl,--no-whole-archive")
+endif()
+
 target_link_libraries(cucumber-cpp-nomain PRIVATE ${CUKE_DEP_LIBRARIES})
 target_link_libraries(cucumber-cpp PRIVATE ${CUKE_DEP_LIBRARIES})
